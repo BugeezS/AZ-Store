@@ -16,7 +16,8 @@
     </style>
 </head>
 
-<body class="bg-gradient-to-b from-gray-800 to-gray-900 text-white">
+<body class="bg-gradient-to-b from-gray-800 to-gray-900 text-white ">
+<?php include './views/partials/header.php'; ?>
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-semibold text-center">Panier d'achat</h1>
 
@@ -107,6 +108,8 @@
 
         <p class="text-center mt-4"><a href="checkout.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Aller à la page de paiement</a></p>
     </div>
+    <?php include './views/partials/footer.php'; ?>
+
 </body>
 </html>
 

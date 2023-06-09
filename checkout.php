@@ -22,6 +22,7 @@
         <title>Checkout</title>
     </head>
     <body class="bg-gradient-to-b from-gray-800 to-gray-900">
+    <?php include './views/partials/header.php'; ?>
         <h1 class="text-2xl flex justify-center text-center mt-1 text-white">Checkout informations</h1>
         <h2 class="text-xl flex justify-center text-center mt-1 text-white">Cart contents</h2>
         <div class="justify-center text-center text-white">
@@ -191,5 +192,7 @@
             // }
         ?>
         </div>
+    <?php include './views/partials/footer.php'; ?>
+
     </body>
 </html>
