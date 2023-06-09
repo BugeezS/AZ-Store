@@ -1,3 +1,16 @@
+<?php 
+    session_start(); 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (validation()) {
+            clear_cart();
+            echo "Thank you for your order ".$_POST['firstName']." !";
+            header("Refresh: 3; url=".$_SERVER['PHP_SELF']);
+            exit;
+        } else {
+            echo "<p>the form does not pass validation!</p>";
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,6 +23,46 @@
     </head>
     <body class="bg-gradient-to-b from-gray-800 to-gray-900">
         <h1 class="text-2xl flex justify-center text-center mt-1 text-white">Checkout informations</h1>
+        <h2 class="text-xl flex justify-center text-center mt-1 text-white">Cart contents</h2>
+        <div class="justify-center text-center text-white">
+        <?php
+            // Calculer le montant total du panier
+            function calculate_total() {
+                $total = 0;
+                foreach ($_SESSION['cart'] as $product) {
+                    $total += floatval($product['price']);
+                }
+                return $total;
+            }
+            // Afficher le panier
+            function display_cart() {
+                $jsonData = file_get_contents('cart.json');
+                $products = json_decode($jsonData, true);
+            
+                if (!empty($products)) { 
+                    $_SESSION['cart'] = $products;
+                    
+                    echo '<table class="w-full max-w-lg mx-auto mt-2 bg-gray-900 border border-gray-700">';
+                    echo '<tr><th class="px-4 py-2">Image</th><th class="px-4 py-2">Produit</th><th class="px-4 py-2">Prix</th></tr>';
+            
+                    foreach ($_SESSION['cart'] as $id => $product) {
+                        echo '<tr>';
+                        echo '<td class="px-4 py-2"><img class="h-24" src="' . $product['image_url'] . '" alt="' . $product['product'] . '"></td>';
+                        echo '<td class="px-4 py-2">' . $product['product'] . '</td>';
+                        echo '<td class="px-4 py-2">' . $product['price'] . '</td>';
+                        echo '<td class="px-4 py-2"></td>';
+                        echo '</tr>';
+                    }
+                    echo '<tr><td colspan="4" class="px-4 py-2">Total : ' . calculate_total() . '$</td></tr>';
+                    echo '</table>';
+                } else {
+                    echo 'Le panier est vide.';
+                }
+            }
+            display_cart();
+        ?>
+        </div>
+        <h2 class="text-xl flex justify-center text-center mt-1 text-white">delivery information</h2>
         <div class="flex justify-center text-center mt-1">
             <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-lg" method="post" action="#" id="form">
                 <div class="flex flex-wrap -mx-3 mb-6">
@@ -54,8 +107,9 @@
                 </div>
             </form>
         </div>
-        <div class="flex justify-center text-center text-white">
+        <div class="flex justify-center text-center text-white mb-8">
         <?php
+            // Validation du nom et prénom
             function names_validation(){
                 if ((isset($_POST['firstName']) AND isset($_POST['lastName'])) AND (!empty($_POST['firstName']) AND !empty($_POST['lastName']))){
                     $_POST['firstName'] = filter_var($_POST['firstName'], FILTER_SANITIZE_STRING);
@@ -74,6 +128,7 @@
                     return false;
                 }
             }
+            // Validation de l'adresse mail
             function mail_validation(){
                 if (isset($_POST['mail']) AND !empty($_POST['mail'])){
                     $mail = filter_var($_POST['mail'], FILTER_SANITIZE_EMAIL);
@@ -91,6 +146,7 @@
                     return false;
                 }
             }
+            // Validation de l'adresse, ville, code postal et pays
             function adress_validation(){
                 if (((isset($_POST['adress']) AND isset($_POST['postCode'])) AND isset($_POST['town']) AND isset($_POST['country']))
                 AND (!empty($_POST['adress']) AND !empty($_POST['postCode']) AND !empty($_POST['town']) AND !empty($_POST['country']))){
@@ -110,6 +166,7 @@
                     return false;
                 }
             }
+            // Validation du formulaire
             function validation(){
                 if(names_validation() && mail_validation() && adress_validation()){
                     return true;
@@ -117,16 +174,21 @@
                     return false;
                 }
             }
-            if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-                if(validation()){
-                    // echo "<pre>";
-                    // print_r($_POST);
-                    // echo "</pre>";
-                    echo "Thank you for your order ".$_POST['firstName']." !";
-                }else{
-                    echo "the form does not pass validation !";
-                }
+            // Vider le panier
+            function clear_cart() {
+                $_SESSION['cart'] = array();
+                file_put_contents('cart.json', '');
             }
+            // if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+            //     if(validation()){
+            //         clear_cart();
+            //         echo "Thank you for your order ".$_POST['firstName']." !";
+            //         header("Refresh: 3; url=".$_SERVER['PHP_SELF']);
+            //         exit;
+            //     }else{
+            //         echo "<p >the form does not pass validation !</p>";
+            //     }
+            // }
         ?>
         </div>
     </body>
