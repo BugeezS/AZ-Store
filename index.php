@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p class="text-xs w-1/3 text-center">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam laudantium, id repellendus impedit quasi mollitia unde harum corrupti deserunt natus omnis sit nesciunt qui numquam deleniti, doloremque modi, est ex!</p>
             </div>
         </section>
-        <section class="text-white">
+        <section class="text-white pb-12">
             <div class="flex justify-center text-center text-sm">
                 <div class="w-1/3 pl-24">
                     <div class="flex justify-center">
