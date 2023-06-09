@@ -50,9 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <header>
-        <nav class="flex flex-row justify-between border-solid border-black border-2 ">
-            <h2 class ="pr-2">AZ-[store]</h2>
-            <ul class="flex flex-row">
+        <nav class="flex flex-row justify-around border-solid border-black border-2 ">
+            <h2>AZ-[store]</h2>
+            <ul class="flex flex-row justify-between">
                 <li>Home</li>
                 <li>About</li>
                 <li>Products</li>
