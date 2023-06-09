@@ -16,8 +16,9 @@
     </style>
 </head>
 
-<body class="bg-gradient-to-b from-gray-800 to-gray-900 text-white ">
+<body class="bg-gradient-to-b from-gray-800 to-gray-900 text-white">
 <?php include './views/partials/header.php'; ?>
+
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-semibold text-center">Panier d'achat</h1>
 
@@ -26,6 +27,14 @@
 
         if (!isset($_SESSION['panier'])) {
             $_SESSION['panier'] = array();
+        }
+
+        // Vérifier les actions à effectuer sur le panier
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['action']) && $_POST['action'] === 'supprimer' && isset($_POST['id'])) {
+                supprimerProduit($_POST['id']);
+                mettreAJourFichierJSON();
+            }
         }
 
         // Supprimer un produit du panier
@@ -40,7 +49,6 @@
             $total = 0;
             foreach ($_SESSION['panier'] as $product) {
                 $total += floatval(str_replace('$', '', $product['price']));
-
             }
             return $total;
         }
@@ -65,15 +73,14 @@
                 echo '</tr>';
             }
 
-            echo '<tr><td colspan="4" class="px-4 py-2">Total : ' . calculerTotal() . '$</td></tr>';
+            echo '<tr><td colspan="4" class="px-4 py-2">Total : $' . calculerTotal() . '</td></tr>';
             echo '</table>';
         }
 
-        // Vérifier les actions à effectuer sur le panier
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['action']) && $_POST['action'] === 'supprimer' && isset($_POST['id'])) {
-                supprimerProduit($_POST['id']);
-            }
+        // Mettre à jour le fichier JSON
+        function mettreAJourFichierJSON() {
+            $jsonData = json_encode($_SESSION['panier'], JSON_PRETTY_PRINT);
+            file_put_contents('cart.json', $jsonData);
         }
 
         // Fonction pour ajouter un produit au panier
@@ -112,6 +119,3 @@
 
 </body>
 </html>
-
-
-
