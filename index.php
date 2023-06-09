@@ -48,20 +48,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="output.css">
     <title>Document</title>
 </head>
-<body>
+<body class="bg-gradient-to-b from-gray-800 to-gray-900">
     <header>
-        <nav class="flex flex-row justify-around border-solid border-black border-2 ">
-            <h2>AZ-[store]</h2>
-            <ul class="flex flex-row justify-between">
-                <li>Home</li>
-                <li>About</li>
-                <li>Products</li>
-                <li>Contact</li>
+        <nav class="flex flex-row justify-around  h-16 items-center">
+            <h2 class="text-white text-2xl font-bold">AZ-[store]</h2>
+            <ul class="flex flex-row ">
+                <li class="pr-4 text-white">Home</li>
+                <li class="pr-4 text-white">About</li>
+                <li class="pr-4 text-white">Products</li>
+                <li class="pr-4 text-white">Contact</li>
             </ul>
             <div class="flex flex-row">
-                <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                <svg fill="#ffff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                     width="20px" height="20px" viewBox="0 0 902.86 902.86"
-                    xml:space="preserve">
+                    xml:space="preserve" >
                 <g>
                     <g>
                         <path d="M671.504,577.829l110.485-432.609H902.86v-68H729.174L703.128,179.2L0,178.697l74.753,399.129h596.751V577.829z
@@ -76,58 +76,86 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </g>
                 </g>
                 </svg>
-                <span>Login</span>
+                <span class="text-white">Login</span>
             </div>
         </nav>
+        <hr class="border-1 border-gray-700">
     </header>
     <main>
-        <section>
-            <p>ShOE THE RIGHT ONE.</p>
-            <button>See our store</button>
-            <img src="./img/shoe_one.png" alt="shoe">
-        </section>
-        <section class="flex flex-row">
-            <h3>Our last products</h3>
-            <?php
-            foreach ($items as $item) {
-                echo '<div class="products_shoes " id=' . $item["id"] . '>
-                    <img src=' . $item['image_url'] . '> 
-                    <h3>' . $item['product'] . '</h3> 
-                    <p>' . $item['price'] . '</p>
-                    <form method="post" action="">
-                        <button name="button' . $i . '" class="add_to_cart" type="submit">add to cart</button>
-                    </form>
-                </div>';
-                $i++;
-            }
-            ?>            
-        </section>
-        <section>
-            <div>
-                <img src="./img/shoe_two.png" alt="shoes 2">
-                <p>WE PROVIDE YOU THE BEST QUALITY</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam laudantium, id repellendus impedit quasi mollitia unde harum corrupti deserunt natus omnis sit nesciunt qui numquam deleniti, doloremque modi, est ex!</p>
+        <section class="flex flex-row ">
+            <div class ="w-2/5 pt-60 pl-24 mr-24">
+                <p class="text-9xl whitespace-normal text-white">SHOE THE RIGHT <span class="text-blue-600">ONE</span>.</p>
+                <button class="bg-gradient-to-r from-indigo-500 h-12 w-36 rounded text-white">See our store</button>
             </div>
-            <div>
-                <div>
-                    <img src="./img/image-emily.jpg" alt="shoes 2">
-                    <span>Emily from xyz</span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed porro, ipsam, repudiandae accusantium possimus sequi eos ad tempora, eaque quam nihil quidem non. Nisi eum necessitatibus laborum veniam atque vitae!</p>
+            <img src="./img/shoe_one.png" alt="shoe" class="">
+
+        </section>
+        <hr class="border-1 border-gray-700 mb-12">
+
+        <section class="flex flex-col mb-24">
+            <h2 class ="text-3xl text-white pl-24 pb-12 font-bold"> <span class="text-blue-600 ">Our</span> last products</h2>
+            <div class="flex flex-row justify-around">
+            <?php
+                foreach ($items as $item) {
+                    echo '<div class="products_shoes text-white  " id=' . $item["id"] . '>
+                        <div class=" shadow-xl ">
+                            <img class="w-64 mb-6" src=' . $item['image_url'] . '> 
+                        </div>
+                        <div class="flex flex-row justify-between">
+                            <div class="flex flex-col">
+                                <h3 class ="text-white text-xl font-bold">' . $item['product'] . '</h3> 
+                                <p class ="text-white text-xl font-bold">' . $item['price'] . '</p>
+                            </div>
+                            <form method="post" action="">
+                                <button name="button' . $i . '" class="add_to_cart bg-blue-500 w-24 h-8 rounded " type="submit">Add to cart</button>
+                            </form>
+                        </div>
+                    </div>';
+                    $i++;
+                }
+                ?>   
+            </div>         
+        </section>
+
+
+        <section class="text-white mb-64">
+            <div class="flex flex-col items-center">
+                <img src="./img/shoe_two.png" alt="shoes 2" class="w-96">
+                <div class="text-center w-1/4 ">
+                    <p class="text-5xl font-bold">WE PROVIDE YOU THE <span class="text-blue-600">BEST</span> QUALITY</p>
                 </div>
-                <div>
-                    <img src="./img/image-thomas.jpg" alt="shoes 2">
-                    <span>Thomas from corporate</span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed porro, ipsam, repudiandae accusantium possimus sequi eos ad tempora, eaque quam nihil quidem non. Nisi eum necessitatibus laborum veniam atque vitae!</p>
+                <p class="text-xs w-1/3 text-center">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam laudantium, id repellendus impedit quasi mollitia unde harum corrupti deserunt natus omnis sit nesciunt qui numquam deleniti, doloremque modi, est ex!</p>
+            </div>
+        </section>
+        <section class="text-white">
+            <div class="flex justify-center text-center text-sm">
+                <div class="w-1/3 pl-24">
+                    <div class="flex justify-center">
+                        <img src="./img/image-emily.jpg" alt="shoes 2" class="rounded-full w-16 mb-4">
+                    </div>
+                    <p class="mb-4">Emily from xyz</p>
+                    <p class="text-gray-400">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed porro, ipsam, repudiandae accusantium possimus sequi eos ad tempora, eaque quam nihil quidem non. Nisi eum necessitatibus laborum veniam atque vitae!"</p>
                 </div>
-                <div>
-                    <img src="./img/image-jennie.jpg" alt="shoes 2">
-                    <span>Jennie from Nike</span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed porro, ipsam, repudiandae accusantium possimus sequi eos ad tempora, eaque quam nihil quidem non. Nisi eum necessitatibus laborum veniam atque vitae!</p>
+                <div class="w-1/3 grid justify-center">
+                <div class="flex justify-center">
+                    <img src="./img/image-thomas.jpg" alt="shoes 2" class="rounded-full w-16 mb-4">
+                </div>
+                    <p class="mb-4">Thomas from corporate</p>
+                    <p class="text-gray-400">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed porro, ipsam, repudiandae accusantium possimus sequi eos ad tempora, eaque quam nihil quidem non. Nisi eum necessitatibus laborum veniam atque vitae!"</p>
+                </div>
+                <div class="w-1/3 pr-24">
+                <div class="flex justify-center">
+                    <img src="./img/image-jennie.jpg" alt="shoes 2" class="rounded-full w-16 mb-4">
+                </div>
+                    <p class="mb-4">Jennie from Nike</p>
+                    <p class="text-gray-400">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed porro, ipsam, repudiandae accusantium possimus sequi eos ad tempora, eaque quam nihil quidem non. Nisi eum necessitatibus laborum veniam atque vitae!"</p>
                 </div>
             </div>
         </section>
     </main>
-    <footer>
+    <hr class="border-1 border-gray-700 mb-12">
+
+    <footer class="text-white">
         <ul>
             <li>Home</li>
             <li>About</li> 
