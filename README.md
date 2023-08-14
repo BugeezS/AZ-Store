@@ -65,14 +65,3 @@ $items = [
 
 ### Good to know
 - You may use tailwindcss or other CSS frameworks to style the website.
-
-
-### Deliverables
-
-- Just a repository on github with the code is enough. (You will learn how to deploy your website later).
-  
-### Printscreen
-
-The client wants the website to look like this. Create the pages and make them look like this. You can use the images in the assets folder.
-
-![Example](az_store.png)
